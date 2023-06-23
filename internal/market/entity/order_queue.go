@@ -24,4 +24,15 @@ func (oq *OrderQueue) Push(x interface{}) {
 	oq.Orders = append(oq.Orders, x.(*Order))
 }
 
-// Pop - remove item at a given position
+// Pop - remove and return last item
+func (oq *OrderQueue) Pop() interface{} {
+	old := oq.Orders
+	n := len(old)
+	item := old[n-1]
+	oq.Orders = old[0 : n-1]
+	return item
+}
+
+func NewOrderQueue() *OrderQueue {
+	return &OrderQueue{}
+}
